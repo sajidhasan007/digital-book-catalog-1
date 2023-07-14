@@ -21,4 +21,4 @@ router.post(
   BookController.createBook
 );
 
-export const CowRouter = router;
+export const BookRouter = router;
