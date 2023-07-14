@@ -24,12 +24,9 @@ const UserSchema = new Schema<IUser, UserModel>(
 );
 
 UserSchema.statics.isUserExist = async function (
-  id: string
-): Promise<IUser | null> {
-  return await User.findOne(
-    { id },
-    { id: 1, password: 1, role: 1, phoneNumber: 1 }
-  );
+  phoneNumber: string
+): Promise<Pick<IUser, '_id' | 'password' | 'role'> | null> {
+  return await User.findOne({ phoneNumber });
 };
 
 UserSchema.statics.isPasswordMatched = async function (

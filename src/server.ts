@@ -3,10 +3,11 @@ import { Server } from 'http';
 import mongoose from 'mongoose';
 import app from './app';
 import config from './config/index';
-import { errorlogger, logger } from './shared/logger';
+// import { errorlogger, logger } from './shared/logger';
 
+// eslint-disable-next-line no-unused-vars
 process.on('uncaughtException', error => {
-  errorlogger.error(error);
+  // errorlogger.error(error);
   process.exit(1);
 });
 
@@ -23,13 +24,14 @@ async function bootstrap() {
       console.log(`Application  listening on port ${config.port}`);
     });
   } catch (err) {
-    errorlogger.error('Failed to connect database', err);
+    // errorlogger.error('Failed to connect database', err);
   }
 
+  // eslint-disable-next-line no-unused-vars
   process.on('unhandledRejection', error => {
     if (server) {
       server.close(() => {
-        errorlogger.error(error);
+        // errorlogger.error(error);
         process.exit(1);
       });
     } else {
@@ -41,7 +43,7 @@ async function bootstrap() {
 bootstrap();
 
 process.on('SIGTERM', () => {
-  logger.info('SIGTERM is received');
+  // logger.info('SIGTERM is received');
   if (server) {
     server.close();
   }

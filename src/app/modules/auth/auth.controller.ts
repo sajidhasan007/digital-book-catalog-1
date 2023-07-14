@@ -11,6 +11,7 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   const { refreshToken, ...others } = result;
 
   // set refresh token into cookie
+
   const cookieOptions = {
     secure: config.env === 'production',
     httpOnly: true,
@@ -21,7 +22,7 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   sendResponse<ILoginUserResponse>(res, {
     statusCode: 200,
     success: true,
-    message: 'User logged in successfully !',
+    message: 'User lohggedin successfully !',
     data: others,
   });
 });
@@ -32,6 +33,7 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
   const result = await AuthService.refreshToken(refreshToken);
 
   // set refresh token into cookie
+
   const cookieOptions = {
     secure: config.env === 'production',
     httpOnly: true,
@@ -42,26 +44,12 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
   sendResponse<IRefreshTokenResponse>(res, {
     statusCode: 200,
     success: true,
-    message: 'User logged in successfully !',
+    message: 'User lohggedin successfully !',
     data: result,
-  });
-});
-
-const changePassword = catchAsync(async (req: Request, res: Response) => {
-  const user = req.user;
-  const { ...passwordData } = req.body;
-
-  await AuthService.changePassword(user, passwordData);
-
-  sendResponse(res, {
-    statusCode: 200,
-    success: true,
-    message: 'Password changed successfully !',
   });
 });
 
 export const AuthController = {
   loginUser,
   refreshToken,
-  changePassword,
 };

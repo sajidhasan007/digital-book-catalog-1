@@ -11,7 +11,7 @@ const createBookZodSchema = z.object({
     genre: z.string({
       required_error: 'Genre is required',
     }),
-    publicationDate: z.date({
+    publicationDate: z.string({
       required_error: 'Publication date is required',
       invalid_type_error: 'Enter a valid date',
     }),
@@ -36,7 +36,7 @@ const updateBookZodSchema = z.object({
       })
       .optional(),
     publicationDate: z
-      .date({
+      .string({
         required_error: 'Publication date is required',
         invalid_type_error: 'Enter a valid date',
       })
