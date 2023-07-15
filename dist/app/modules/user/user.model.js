@@ -29,11 +29,11 @@ const UserSchema = new mongoose_1.Schema({
     role: { type: String, required: true, enum: user_1.ENUM_USER_ROLE },
     password: { type: String, required: true, select: 0 },
     address: { type: String, required: true },
-    email: { type: String },
+    email: { type: String, required: true, unique: true },
 }, { timestamps: true });
-UserSchema.statics.isUserExist = function (phoneNumber) {
+UserSchema.statics.isUserExist = function (email) {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield exports.User.findOne({ phoneNumber });
+        return yield exports.User.findOne({ email });
     });
 };
 UserSchema.statics.isPasswordMatched = function (givenPassword, savedPassword) {

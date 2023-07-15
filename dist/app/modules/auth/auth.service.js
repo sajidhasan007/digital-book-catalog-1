@@ -19,9 +19,9 @@ const ApiError_1 = __importDefault(require("../../../errors/ApiError"));
 const jwtHelpers_1 = require("../../../helpers/jwtHelpers");
 const user_model_1 = require("../user/user.model");
 const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const { password, phoneNumber } = payload;
-    console.log('my phone number is = ', phoneNumber);
-    const isUserExist = yield user_model_1.User.isUserExist(phoneNumber);
+    const { password, email } = payload;
+    // console.log('my emain  is = ', email);
+    const isUserExist = yield user_model_1.User.isUserExist(email);
     if (!isUserExist) {
         throw new ApiError_1.default(http_status_1.default.NOT_FOUND, 'User does not exist');
     }

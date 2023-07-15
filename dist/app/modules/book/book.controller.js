@@ -58,8 +58,8 @@ const getSingleBook = (0, catchAsync_1.default)((req, res, next) => __awaiter(vo
 const updateBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     const updatedData = req.body;
-    const sellerId = req.headers.authorization;
-    const result = yield book_service_1.BookService.updateBook(id, sellerId, updatedData);
+    // const sellerId = req.headers.authorization;
+    const result = yield book_service_1.BookService.updateBook(id, req.user, updatedData);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
@@ -69,8 +69,7 @@ const updateBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
 }));
 const deleteBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const token = req.headers.authorization;
-    const result = yield book_service_1.BookService.deleteBook(id, token);
+    const result = yield book_service_1.BookService.deleteBook(id, req.user);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,

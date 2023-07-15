@@ -18,15 +18,15 @@ const UserSchema = new Schema<IUser, UserModel>(
     role: { type: String, required: true, enum: ENUM_USER_ROLE },
     password: { type: String, required: true, select: 0 },
     address: { type: String, required: true },
-    email: { type: String },
+    email: { type: String, required: true, unique: true },
   },
   { timestamps: true }
 );
 
 UserSchema.statics.isUserExist = async function (
-  phoneNumber: string
+  email: string
 ): Promise<Pick<IUser, '_id' | 'password' | 'role'> | null> {
-  return await User.findOne({ phoneNumber });
+  return await User.findOne({ email });
 };
 
 UserSchema.statics.isPasswordMatched = async function (

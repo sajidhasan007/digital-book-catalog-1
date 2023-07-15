@@ -26,7 +26,7 @@ const getReview: RequestHandler = catchAsync(
 const createReview: RequestHandler = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const Book = req.body;
-    const result = await ReviewService.createReview(Book);
+    const result = await ReviewService.createReview(Book, req.user);
 
     sendReponse<IReview>(res, {
       statusCode: httpStatus.OK,

@@ -37,7 +37,7 @@ const updateBookZodSchema = zod_1.z.object({
         })
             .optional(),
         publicationDate: zod_1.z
-            .date({
+            .string({
             required_error: 'Publication date is required',
             invalid_type_error: 'Enter a valid date',
         })

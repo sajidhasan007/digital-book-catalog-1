@@ -11,10 +11,10 @@ import {
 } from './auth.interface';
 
 const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
-  const { password, phoneNumber } = payload;
+  const { password, email } = payload;
 
-  console.log('my phone number is = ', phoneNumber);
-  const isUserExist = await User.isUserExist(phoneNumber);
+  // console.log('my emain  is = ', email);
+  const isUserExist = await User.isUserExist(email);
 
   if (!isUserExist) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User does not exist');
@@ -43,6 +43,7 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   return {
     accessToken,
     refreshToken,
+    name: isUserExist?.name,
   };
 };
 

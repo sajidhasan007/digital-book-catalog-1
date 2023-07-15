@@ -1,4 +1,5 @@
 import httpStatus from 'http-status';
+import { JwtPayload } from 'jsonwebtoken';
 import { SortOrder } from 'mongoose';
 import ApiError from '../../../errors/ApiError';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
@@ -41,16 +42,21 @@ const getAllReview = async (
   };
 };
 
-const createReview = async (payload: IReview): Promise<IReview | null> => {
+const createReview = async (
+  payload: IReview,
+  user: JwtPayload | null
+): Promise<IReview | null> => {
   const isExist = await Review.findOne({
-    user: payload?.user,
+    user: user?.userId,
     book: payload?.book,
   });
 
   if (isExist) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Duplicate review in not allow');
   }
-  const response = (await Review.create(payload)).populate('user');
+  const response = (
+    await Review.create({ ...payload, user: user?.userId })
+  ).populate('user');
   if (!response) {
     throw new ApiError(400, 'Faield to create');
   }
