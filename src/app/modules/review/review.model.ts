@@ -5,7 +5,6 @@ const cowSchema = new Schema<IReview>(
   {
     review: { type: Number, required: true },
     comment: { type: String, required: true },
-
     user: {
       type: String,
       ref: 'User',

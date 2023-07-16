@@ -26,7 +26,7 @@ const getAllBook: RequestHandler = catchAsync(
 const createBook: RequestHandler = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const Book = req.body;
-    const result = await BookService.createBook(Book);
+    const result = await BookService.createBook(Book, req.user);
     sendReponse<IBook>(res, {
       statusCode: httpStatus.OK,
       success: true,

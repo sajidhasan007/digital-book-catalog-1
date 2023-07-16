@@ -83,7 +83,7 @@ const createBook = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     return response;
 });
 const getSingleBook = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield book_model_1.Book.findById(id).populate('seller');
+    const result = yield book_model_1.Book.findById(id).populate('user');
     return result;
 });
 const updateBook = (id, user, payload) => __awaiter(void 0, void 0, void 0, function* () {

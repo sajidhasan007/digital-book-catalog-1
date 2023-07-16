@@ -42,15 +42,15 @@ const getAllReview = (pagination, bookId) => __awaiter(void 0, void 0, void 0, f
         data: result,
     };
 });
-const createReview = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+const createReview = (payload, user) => __awaiter(void 0, void 0, void 0, function* () {
     const isExist = yield review_model_1.Review.findOne({
-        user: payload === null || payload === void 0 ? void 0 : payload.user,
+        user: user === null || user === void 0 ? void 0 : user.userId,
         book: payload === null || payload === void 0 ? void 0 : payload.book,
     });
     if (isExist) {
         throw new ApiError_1.default(http_status_1.default.FORBIDDEN, 'Duplicate review in not allow');
     }
-    const response = (yield review_model_1.Review.create(payload)).populate('user');
+    const response = (yield review_model_1.Review.create(Object.assign(Object.assign({}, payload), { user: user === null || user === void 0 ? void 0 : user.userId }))).populate('user');
     if (!response) {
         throw new ApiError_1.default(400, 'Faield to create');
     }

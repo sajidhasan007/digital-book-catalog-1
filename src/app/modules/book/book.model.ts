@@ -6,7 +6,7 @@ const cowSchema = new Schema<IBook>(
     title: { type: String, required: true },
     author: { type: String, required: true },
     genre: { type: String, required: true },
-    publicationDate: { type: String, required: true },
+    publicationDate: { type: Date, required: true },
     user: {
       type: String,
       ref: 'User',

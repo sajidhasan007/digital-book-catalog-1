@@ -26,8 +26,7 @@ function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield mongoose_1.default.connect(index_1.default.database_url);
-            // logger.info(`🛢   Database is connected successfully`);
-            console.log(`🛢   Database is connected successfully`);
+            console.log(`Database is connected successfully`);
             server = app_1.default.listen(index_1.default.port, () => {
                 // logger.info(`Application  listening on port ${config.port}`);
                 console.log(`Application  listening on port ${index_1.default.port}`);
@@ -52,7 +51,7 @@ function bootstrap() {
 }
 bootstrap();
 process.on('SIGTERM', () => {
-    // logger.info('SIGTERM is received');
+    console.log('SIGTERM is received');
     if (server) {
         server.close();
     }

@@ -35,6 +35,7 @@ const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     return {
         accessToken,
         refreshToken,
+        name: isUserExist === null || isUserExist === void 0 ? void 0 : isUserExist.name,
     };
 });
 const refreshToken = (token) => __awaiter(void 0, void 0, void 0, function* () {

@@ -68,8 +68,13 @@ const getAllBook = async (
   };
 };
 
-const createBook = async (payload: IBook): Promise<IBook | null> => {
-  const response = (await Book.create(payload)).populate('user');
+const createBook = async (
+  payload: IBook,
+  user: JwtPayload | null
+): Promise<IBook | null> => {
+  const response = (
+    await Book.create({ ...payload, user: user?.userId })
+  ).populate('user');
   if (!response) {
     throw new ApiError(400, 'Faield to create');
   }

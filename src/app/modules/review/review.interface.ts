@@ -4,6 +4,7 @@ import { IBook } from '../book/book.interface';
 export type IReview = {
   review: number;
   comment: string;
+  user?: string;
   book: Types.ObjectId | IBook;
 };
 
