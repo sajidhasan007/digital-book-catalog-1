@@ -75,8 +75,8 @@ const getAllBook = (pagination, filters) => __awaiter(void 0, void 0, void 0, fu
         data: result,
     };
 });
-const createBook = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const response = (yield book_model_1.Book.create(payload)).populate('user');
+const createBook = (payload, user) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = (yield book_model_1.Book.create(Object.assign(Object.assign({}, payload), { user: user === null || user === void 0 ? void 0 : user.userId }))).populate('user');
     if (!response) {
         throw new ApiError_1.default(400, 'Faield to create');
     }

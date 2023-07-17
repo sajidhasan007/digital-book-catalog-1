@@ -35,7 +35,7 @@ const getAllBook = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 
 }));
 const createBook = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const Book = req.body;
-    const result = yield book_service_1.BookService.createBook(Book);
+    const result = yield book_service_1.BookService.createBook(Book, req.user);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,

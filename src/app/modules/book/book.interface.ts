@@ -12,6 +12,6 @@ export type IBook = {
 export type BookModel = Model<IBook, Record<string, unknown>>;
 export type IBookFilters = {
   searchTerm?: string;
-  publicationDate?: Date;
+  publicationDate?: string;
   genre?: string;
 };

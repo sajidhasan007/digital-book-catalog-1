@@ -5,6 +5,7 @@ import ApiError from '../../../errors/ApiError';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
+import { filterFalsyValues } from '../../../shared/lib';
 import { bookSearchableFields } from './book.constant';
 import { IBook, IBookFilters } from './book.interface';
 import { Book } from './book.model';
@@ -18,7 +19,7 @@ const getAllBook = async (
   // sortOrder;
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(pagination);
-  const { searchTerm, ...filtersData } = filters; // Add minPrice and maxPrice
+  const { searchTerm, publicationDate, ...filtersData } = filters; // Add minPrice and maxPrice
 
   const sortOptions: { [key: string]: SortOrder } = {};
   if (sortBy && sortOrder) {
@@ -37,12 +38,35 @@ const getAllBook = async (
       })),
     });
   }
+  // const nonEmptyFilters = Object.entries(filtersData).reduce(
+  //   (acc, [field, value]) => {
+  //     if (value) {
+  //       acc[field] = value;
+  //     }
+  //     return acc;
+  //   },
+  //   {}
+  // );
+  console.log(filtersData);
 
-  if (Object.keys(filtersData).length) {
+  const NewFiltersData = filterFalsyValues(filtersData);
+
+  if (Object.keys(NewFiltersData).length) {
     andConditions.push({
-      $and: Object.entries(filtersData).map(([field, value]) => ({
+      $and: Object.entries(NewFiltersData).map(([field, value]) => ({
         [field]: value,
       })),
+    });
+  }
+
+  // const publicationDate = '1945';
+
+  if (publicationDate) {
+    const year = parseInt(publicationDate); // Convert the publicationDate to an integer
+    andConditions.push({
+      $expr: {
+        $eq: [{ $year: { $toDate: '$publicationDate' } }, year],
+      },
     });
   }
 

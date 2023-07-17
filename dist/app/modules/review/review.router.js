@@ -11,6 +11,6 @@ const validateRequest_1 = __importDefault(require("../../middlewares/validateReq
 const review_controller_1 = require("./review.controller");
 const review_validation_1 = require("./review.validation");
 const router = express_1.default.Router();
-router.get('/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.USER), review_controller_1.ReviewController.getReview);
+router.get('/:id', review_controller_1.ReviewController.getReview);
 router.post('/create-review', (0, auth_1.default)(user_1.ENUM_USER_ROLE.USER), (0, validateRequest_1.default)(review_validation_1.ReviewValidation === null || review_validation_1.ReviewValidation === void 0 ? void 0 : review_validation_1.ReviewValidation.createReviewkZodSchema), review_controller_1.ReviewController.createReview);
 exports.ReviewRouter = router;
