@@ -1,4 +1,4 @@
-import { NextFunction, Request, RequestHandler, Response } from 'express';
+import { Request, RequestHandler, Response } from 'express';
 import httpStatus from 'http-status';
 import { paginationFields } from '../../../constants/pagination';
 import catchAsync from '../../../shared/catchAsync';
@@ -8,7 +8,7 @@ import { bookFilterableFields } from './book.constant';
 import { IBook } from './book.interface';
 import { BookService } from './book.service';
 const getAllBook: RequestHandler = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response) => {
     const paginationOptions = pick(req.query, paginationFields);
     const filters = pick(req.query, bookFilterableFields);
     const result = await BookService.getAllBook(paginationOptions, filters);
@@ -19,12 +19,11 @@ const getAllBook: RequestHandler = catchAsync(
       meta: result?.meta,
       data: result?.data,
     });
-    next();
   }
 );
 
 const createBook: RequestHandler = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response) => {
     const Book = req.body;
     const result = await BookService.createBook(Book, req.user);
     sendReponse<IBook>(res, {
@@ -33,25 +32,21 @@ const createBook: RequestHandler = catchAsync(
       message: 'Book created successfully!',
       data: result,
     });
-    next();
   }
 );
 
-const getSingleBook = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const id = req.params.id;
+const getSingleBook = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
 
-    const result = await BookService.getSingleBook(id);
+  const result = await BookService.getSingleBook(id);
 
-    sendReponse<IBook>(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Book retrive successfully!',
-      data: result,
-    });
-    next();
-  }
-);
+  sendReponse<IBook>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Book retrive successfully!',
+    data: result,
+  });
+});
 
 const updateBook = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;

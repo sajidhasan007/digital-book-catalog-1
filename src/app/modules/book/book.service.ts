@@ -47,7 +47,7 @@ const getAllBook = async (
   //   },
   //   {}
   // );
-  console.log(filtersData);
+  console.log(publicationDate);
 
   const NewFiltersData = filterFalsyValues(filtersData);
 
