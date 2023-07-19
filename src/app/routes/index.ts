@@ -1,6 +1,7 @@
 import express from 'express';
 import { AuthRoutes } from '../modules/auth/auth.router';
 import { BookRouter } from '../modules/book/book.router';
+import { FavouriteListRouter } from '../modules/favouriteList/favouriteList.router';
 import { ReviewRouter } from '../modules/review/review.router';
 import { UserRoutes } from '../modules/user/user.route';
 
@@ -22,6 +23,10 @@ const moduleRoutes = [
   {
     path: '/review',
     route: ReviewRouter,
+  },
+  {
+    path: '/favourite-list',
+    route: FavouriteListRouter,
   },
 ];
 
