@@ -12,6 +12,10 @@ const cowSchema = new Schema<IBook>(
       ref: 'User',
       required: true,
     },
+    isFavourite: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

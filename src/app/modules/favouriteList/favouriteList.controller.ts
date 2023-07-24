@@ -47,7 +47,7 @@ const createFavouriteList: RequestHandler = catchAsync(
 const deleteFavouriteList: RequestHandler = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const Book = req.body;
-    const result = await FavouriteListService.createFavouriteList(
+    const result = await FavouriteListService.deleteFavouriteList(
       Book,
       req.user
     );

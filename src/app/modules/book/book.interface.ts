@@ -7,6 +7,7 @@ export type IBook = {
   genre: string;
   publicationDate: Date;
   user: Types.ObjectId | IUser;
+  isFavourite?: boolean;
 };
 
 export type BookModel = Model<IBook, Record<string, unknown>>;

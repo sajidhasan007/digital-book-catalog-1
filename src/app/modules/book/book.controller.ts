@@ -37,8 +37,10 @@ const createBook: RequestHandler = catchAsync(
 
 const getSingleBook = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
+  const token = req.headers.authorization;
+  console.log('controller token is = ', token);
 
-  const result = await BookService.getSingleBook(id);
+  const result = await BookService.getSingleBook(id, token);
 
   sendReponse<IBook>(res, {
     statusCode: httpStatus.OK,
